@@ -30,17 +30,6 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
   
   const imageUrl = isValidImageUrl ? project.thumbnail_url : (videoId ? thumbnail : '');
   
-  // Debug logging
-  if (project.title && (project.thumbnail_url?.includes('youtu') || project.video_url?.includes('youtu'))) {
-    console.warn(`[ProjectCard] ${project.title}:`, {
-      thumbnail_url: project.thumbnail_url,
-      video_url: project.video_url,
-      videoId,
-      isValidImageUrl,
-      imageUrl,
-    });
-  }
-  
   const price = Number(project.price) || 0;
   const discountedPrice = Number(project.discounted_price) || price;
   const discount = price > 0 ? Math.round(((price - discountedPrice) / price) * 100) : 0;
