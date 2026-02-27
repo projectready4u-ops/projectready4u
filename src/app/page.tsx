@@ -151,14 +151,13 @@ export default function HomePage() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link href="/projects">
-                <Button className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white h-12 px-8 text-lg" size="lg">
+                <Button className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold h-12 px-8 text-lg" size="lg">
                   Browse Projects <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
               <Button
                 onClick={() => window.open(`https://wa.me/91${whatsappNumber}`, '_blank')}
-                variant="outline"
-                className="border-white/20 hover:border-white/40 h-12 px-8 text-lg"
+                className="border border-white/40 hover:border-white/60 bg-white/5 hover:bg-white/10 text-white font-semibold h-12 px-8 text-lg"
                 size="lg"
               >
                 <MessageCircle className="w-5 h-5 mr-2" />
