@@ -173,6 +173,7 @@ export default function EmailTemplatesPage() {
                   <Button
                     onClick={() => setPreviewMode(true)}
                     variant={previewMode ? 'default' : 'outline'}
+                    className="text-white border-white/20 hover:border-white/40"
                   >
                     <Eye className="w-4 h-4 mr-2" />
                     Preview

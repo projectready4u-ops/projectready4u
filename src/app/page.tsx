@@ -233,7 +233,7 @@ export default function HomePage() {
             <Link href="/projects">
               <Button
                 variant="outline"
-                className="border-white/20 hover:border-white/40 text-white"
+                className="border-white/20 hover:border-white/40 text-white font-semibold"
               >
                 View All Projects <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

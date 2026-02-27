@@ -137,21 +137,21 @@ export default function FeedbackManagementPage() {
           <Button
             onClick={() => setFilter('all')}
             variant={filter === 'all' ? 'default' : 'outline'}
-            className={filter === 'all' ? 'bg-violet-600' : 'border-white/20'}
+            className={filter === 'all' ? 'bg-violet-600' : 'border-white/20 text-white'}
           >
             All
           </Button>
           <Button
             onClick={() => setFilter('pending')}
             variant={filter === 'pending' ? 'default' : 'outline'}
-            className={filter === 'pending' ? 'bg-yellow-600' : 'border-white/20'}
+            className={filter === 'pending' ? 'bg-yellow-600' : 'border-white/20 text-white'}
           >
             Pending ({pendinCount})
           </Button>
           <Button
             onClick={() => setFilter('approved')}
             variant={filter === 'approved' ? 'default' : 'outline'}
-            className={filter === 'approved' ? 'bg-green-600' : 'border-white/20'}
+            className={filter === 'approved' ? 'bg-green-600' : 'border-white/20 text-white'}
           >
             Approved ({approvedCount})
           </Button>
