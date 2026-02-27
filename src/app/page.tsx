@@ -105,10 +105,10 @@ export default function HomePage() {
             </Link>
             <Button
               onClick={() => window.open(`https://wa.me/91${whatsappNumber}`, '_blank')}
-              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold gap-2"
             >
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Contact Us
+              <MessageCircle className="w-4 h-4" />
+              <span>Contact Us</span>
             </Button>
           </div>
         </div>
@@ -390,8 +390,8 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold text-white mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms</a></li>
+                <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link></li>
               </ul>
             </div>
           </div>

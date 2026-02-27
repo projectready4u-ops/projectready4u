@@ -13,16 +13,22 @@ import { supabase } from '@/lib/supabase';
 interface Settings {
   whatsapp_number: string;
   admin_email: string;
+  support_email: string;
   site_name: string;
   site_description: string;
+  terms_content: string;
+  privacy_content: string;
 }
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings>({
     whatsapp_number: '919876543210',
     admin_email: 'admin@projectready4u.com',
+    support_email: 'support@projectready4u.com',
     site_name: 'Projectready4U',
     site_description: 'Academic Project Marketplace',
+    terms_content: 'Terms and Conditions content here...',
+    privacy_content: 'Privacy Policy content here...',
   });
 
   const [loading, setLoading] = useState(true);
@@ -41,8 +47,11 @@ export default function SettingsPage() {
       const defaultSettings: Settings = {
         whatsapp_number: '919876543210',
         admin_email: 'admin@projectready4u.com',
+        support_email: 'support@projectready4u.com',
         site_name: 'Projectready4U',
         site_description: 'Academic Project Marketplace',
+        terms_content: 'Terms and Conditions content here...',
+        privacy_content: 'Privacy Policy content here...',
       };
 
       // Step 1: Try to load from Supabase
@@ -61,12 +70,18 @@ export default function SettingsPage() {
           data.forEach((item: any) => {
             if (item.setting_key === 'contact_email') {
               loadedFromDb['admin_email'] = item.setting_value;
+            } else if (item.setting_key === 'support_email') {
+              loadedFromDb['support_email'] = item.setting_value;
             } else if (item.setting_key === 'whatsapp_number') {
               loadedFromDb['whatsapp_number'] = item.setting_value;
             } else if (item.setting_key === 'site_name') {
               loadedFromDb['site_name'] = item.setting_value;
             } else if (item.setting_key === 'site_description') {
               loadedFromDb['site_description'] = item.setting_value;
+            } else if (item.setting_key === 'terms_content') {
+              loadedFromDb['terms_content'] = item.setting_value;
+            } else if (item.setting_key === 'privacy_content') {
+              loadedFromDb['privacy_content'] = item.setting_value;
             }
           });
           console.log('[LoadSettings] Parsed from DB:', loadedFromDb);
@@ -119,8 +134,11 @@ export default function SettingsPage() {
       const settingsToUpdate = [
         { key: 'whatsapp_number', value: settings.whatsapp_number, description: 'WhatsApp business number' },
         { key: 'contact_email', value: settings.admin_email, description: 'Admin contact email' },
+        { key: 'support_email', value: settings.support_email, description: 'Support email address' },
         { key: 'site_name', value: settings.site_name, description: 'Website name' },
         { key: 'site_description', value: settings.site_description, description: 'Site description' },
+        { key: 'terms_content', value: settings.terms_content, description: 'Terms and Conditions' },
+        { key: 'privacy_content', value: settings.privacy_content, description: 'Privacy Policy' },
       ];
 
       let savedCount = 0;
@@ -297,6 +315,70 @@ export default function SettingsPage() {
                 </div>
               </Card>
             </div>
+
+            {/* Support & Legal Settings */}
+            <Card className="border border-white/10 bg-white/5 p-6 mt-8">
+              <h2 className="text-xl font-bold text-white mb-6">Support & Legal</h2>
+
+              <div className="space-y-6">
+                {/* Support Email */}
+                <div>
+                  <Label htmlFor="supportEmail" className="text-white font-semibold mb-2 block">
+                    Support Email Address
+                  </Label>
+                  <p className="text-xs text-gray-400 mb-3">
+                    Email address for user support queries
+                  </p>
+                  <Input
+                    id="supportEmail"
+                    type="email"
+                    placeholder="support@projectready4u.com"
+                    value={settings.support_email}
+                    onChange={(e) => setSettings({ ...settings, support_email: e.target.value })}
+                    disabled={saving}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-500"
+                  />
+                </div>
+
+                {/* Terms & Conditions */}
+                <div>
+                  <Label htmlFor="terms" className="text-white font-semibold mb-2 block">
+                    Terms & Conditions
+                  </Label>
+                  <p className="text-xs text-gray-400 mb-3">
+                    Terms content displayed on /terms page
+                  </p>
+                  <textarea
+                    id="terms"
+                    placeholder="Enter your Terms & Conditions content..."
+                    value={settings.terms_content}
+                    onChange={(e) => setSettings({ ...settings, terms_content: e.target.value })}
+                    disabled={saving}
+                    rows={6}
+                    className="w-full bg-white/5 border border-white/10 text-white placeholder:text-gray-500 rounded-lg p-3 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Privacy Policy */}
+                <div>
+                  <Label htmlFor="privacy" className="text-white font-semibold mb-2 block">
+                    Privacy Policy
+                  </Label>
+                  <p className="text-xs text-gray-400 mb-3">
+                    Privacy content displayed on /privacy page
+                  </p>
+                  <textarea
+                    id="privacy"
+                    placeholder="Enter your Privacy Policy content..."
+                    value={settings.privacy_content}
+                    onChange={(e) => setSettings({ ...settings, privacy_content: e.target.value })}
+                    disabled={saving}
+                    rows={6}
+                    className="w-full bg-white/5 border border-white/10 text-white placeholder:text-gray-500 rounded-lg p-3 focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </Card>
 
             {/* Info Box */}
             <Card className="border border-violet-500/50 bg-violet-500/5 p-6 mt-8">
