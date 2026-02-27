@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseServer } from '@/lib/supabase';
 import { isValidEmail } from '@/lib/utils';
 
 // POST - Submit feedback
@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Insert feedback (approved = false by default, admin will approve)
-    const { data, error } = await supabase
+    const db = supabaseServer();
+    const { data, error } = await db
       .from('customer_feedback')
       .insert([
         {
@@ -74,7 +75,8 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const approved = searchParams.get('approved');
 
-    let query = supabase.from('customer_feedback').select('*').order('created_at', { ascending: false });
+    const db = supabaseServer();
+    let query = db.from('customer_feedback').select('*').order('created_at', { ascending: false });
 
     if (approved === 'true') {
       query = query.eq('approved', true);
