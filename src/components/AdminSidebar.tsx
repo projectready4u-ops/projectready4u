@@ -40,10 +40,11 @@ export function AdminSidebar({ userName }: AdminSidebarProps) {
   const handleLogout = async () => {
     // Clear localStorage and cookies
     localStorage.removeItem('adminAuth');
+    localStorage.removeItem('adminEmail');
     sessionStorage.removeItem('adminAuth');
     document.cookie = 'adminAuth=; path=/; max-age=0';
     
-    window.location.href = '/admin';
+    window.location.href = '/admin/login';
   };
 
   return (
