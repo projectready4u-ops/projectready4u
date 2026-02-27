@@ -28,6 +28,7 @@ export function AdminSidebar({ userName }: AdminSidebarProps) {
     { href: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
     { href: '/admin/projects', label: 'Projects', icon: '🎓' },
     { href: '/admin/requests', label: 'Requests', icon: '📮' },
+    { href: '/admin/feedback', label: 'Feedback', icon: '⭐' },
     { href: '/admin/users', label: 'Users', icon: '👥' },
     { href: '/admin/admins', label: 'Admins', icon: '🔐' },
     { href: '/admin/settings', label: 'Settings', icon: '⚙️' },

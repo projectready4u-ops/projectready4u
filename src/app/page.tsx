@@ -7,41 +7,22 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProjectCard } from '@/components/ProjectCard';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
-import { VideoModal } from '@/components/VideoModal';
+import { FeedbackForm } from '@/components/FeedbackForm';
+import { FeedbackCarousel } from '@/components/FeedbackCarousel';
 import { fetchFeaturedProjects, fetchCategories } from '@/lib/supabase';
 import { Project, YouTubeVideo, Category } from '@/types';
-import { MessageCircle, ArrowRight, Play, Users, BookOpen } from 'lucide-react';
+import { MessageCircle, ArrowRight, Users, BookOpen, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
-const FEATURED_VIDEOS: YouTubeVideo[] = [
-  {
-    id: '1',
-    title: 'Smart Attendance System Demo',
-    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-    videoId: 'dQw4w9WgXcQ',
-  },
-  {
-    id: '2',
-    title: 'AI-Based Face Recognition Project',
-    thumbnail: 'https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg',
-    videoId: '9bZkp7q19f0',
-  },
-  {
-    id: '3',
-    title: 'IoT Weather Monitoring System',
-    thumbnail: 'https://img.youtube.com/vi/jNQXAC9IVRw/maxresdefault.jpg',
-    videoId: 'jNQXAC9IVRw',
-  },
-];
+const FEATURED_VIDEOS: YouTubeVideo[] = [];
 
 export default function HomePage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [categories, setCategories] = useState<(Category & { count: number })[]>([]);
   const [loading, setLoading] = useState(true);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
-  const [selectedVideo, setSelectedVideo] = useState<YouTubeVideo | null>(null);
-  const [totalProjects, setTotalProjects] = useState(0);
+  const [approvedFeedbackCount, setApprovedFeedbackCount] = useState(0);
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER!;
 
   useEffect(() => {
@@ -49,7 +30,6 @@ export default function HomePage() {
       try {
         const data = await fetchFeaturedProjects(3);
         setProjects(data);
-        setTotalProjects(data.length);
       } catch (error) {
         toast.error('Failed to load projects');
       } finally {
@@ -68,12 +48,26 @@ export default function HomePage() {
       }
     };
 
+    const loadApprovedFeedback = async () => {
+      try {
+        const response = await fetch('/api/feedback?approved=true');
+        if (response.ok) {
+          const data = await response.json();
+          setApprovedFeedbackCount(data.count || 0);
+        }
+      } catch (error) {
+        console.error('Failed to load feedback count', error);
+      }
+    };
+
     loadProjects();
     loadCategories();
+    loadApprovedFeedback();
   }, []);
 
   const stats = [
     { icon: BookOpen, label: 'Projects Available', value: `${categories.reduce((sum, cat) => sum + cat.count, 0)}+` },
+    { icon: Heart, label: 'Happy Customers', value: `${approvedFeedbackCount}+` },
     { icon: Users, label: 'Students Served', value: '5,000+' },
   ];
 
@@ -296,45 +290,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* YouTube Videos Section */}
+      {/* YouTube Videos Section - REMOVED - REPLACED WITH CUSTOMER FEEDBACK */}
       <section className="py-20 bg-white/[0.02] border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Watch Before You Buy</h2>
-            <p className="text-gray-400 text-lg">Full demos on every project — see what you're getting</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What Our Happy Customers Say</h2>
+            <p className="text-gray-400 text-lg">Real feedback from students who used our projects successfully</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {FEATURED_VIDEOS.map((video, idx) => (
-              <motion.div
-                key={video.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1, duration: 0.6 }}
-              >
-                <Card className="group overflow-hidden border border-white/10 bg-white/5 hover:shadow-lg hover:shadow-violet-500/20 transition-all cursor-pointer"
-                  onClick={() => setSelectedVideo(video)}
-                >
-                  <div className="relative aspect-video overflow-hidden bg-black">
-                    <Image
-                      src={video.thumbnail}
-                      alt={video.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-full bg-violet-600 group-hover:bg-violet-700 flex items-center justify-center transition-colors">
-                        <Play className="w-8 h-8 text-white ml-1" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-white line-clamp-2">{video.title}</h3>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+          {/* Approved Feedback Carousel */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <FeedbackCarousel />
           </div>
+
+          {/* Feedback Submission Form */}
+          <Card className="border border-violet-500/50 bg-gradient-to-r from-violet-500/10 to-indigo-500/10 p-8">
+            <h3 className="text-2xl font-bold text-white mb-6">Share Your Experience</h3>
+            <p className="text-gray-300 mb-6">Help other students by sharing your feedback. Your experience will be displayed after admin approval.</p>
+            <FeedbackForm />
+          </Card>
         </div>
       </section>
 
@@ -405,15 +379,6 @@ export default function HomePage() {
 
       {/* Floating WhatsApp Button */}
       <FloatingWhatsApp />
-
-      {/* Video Modal */}
-      {selectedVideo && (
-        <VideoModal
-          videoId={selectedVideo.videoId}
-          title={selectedVideo.title}
-          onClose={() => setSelectedVideo(null)}
-        />
-      )}
     </main>
   );
 }
