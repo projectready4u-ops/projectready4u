@@ -25,7 +25,7 @@ function LoginForm() {
 
     try {
       // Check credentials
-      if (email === 'projectready4u@gmail.com' && password === 'Admin@123456') {
+      if (email === 'projectready4u@gmail.com' && password === 'AmbiChanna@Kallesh@123') {
         // Set auth in localStorage and cookie
         localStorage.setItem('adminAuth', 'true');
         localStorage.setItem('adminEmail', email);
@@ -114,10 +114,10 @@ function LoginForm() {
 
       {/* Info */}
       <div className="mt-6 p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
-        <p className="text-xs text-cyan-300 font-semibold mb-2">Demo Credentials:</p>
+        <p className="text-xs text-cyan-300 font-semibold mb-2">Admin Credentials:</p>
         <p className="text-xs text-gray-300">
           <span className="text-cyan-400">Email:</span> projectready4u@gmail.com<br/>
-          <span className="text-cyan-400">Password:</span> Admin@123456
+          <span className="text-cyan-400">Password:</span> AmbiChanna@Kallesh@123
         </p>
       </div>
 
