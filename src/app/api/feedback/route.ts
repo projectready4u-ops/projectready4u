@@ -37,9 +37,18 @@ export async function POST(req: NextRequest) {
       .select();
 
     if (error) {
-      console.error('[FEEDBACK API] Database error:', error);
+      console.error('[FEEDBACK API] Database error:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
       return NextResponse.json(
-        { error: 'Failed to save feedback' },
+        { 
+          error: 'Failed to save feedback',
+          details: error.message || 'Database error',
+          hint: error.hint || 'The customer_feedback table may not exist. Please contact admin.',
+        },
         { status: 500 }
       );
     }
@@ -76,9 +85,18 @@ export async function GET(req: NextRequest) {
     const { data, error } = await query;
 
     if (error) {
-      console.error('[FEEDBACK API] Database error:', error);
+      console.error('[FEEDBACK API] Database error on GET:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
       return NextResponse.json(
-        { error: 'Failed to load feedback' },
+        { 
+          error: 'Failed to load feedback',
+          details: error.message || 'Database error',
+          hint: 'The customer_feedback table may not exist. Please create it in Supabase.',
+        },
         { status: 500 }
       );
     }
