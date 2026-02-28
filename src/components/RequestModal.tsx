@@ -196,6 +196,17 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+                e.currentTarget.style.transform = 'scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <MessageCircle className="w-4 h-4" />
