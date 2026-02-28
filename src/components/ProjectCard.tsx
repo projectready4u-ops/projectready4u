@@ -148,7 +148,6 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
               <button
                 style={{
                   background: 'white',
-                  color: '#000000 !important',
                   padding: '10px 16px',
                   borderRadius: '6px',
                   fontWeight: '600',
@@ -157,15 +156,14 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
                   width: '100%',
                   transition: 'all 0.2s ease',
                 }}
+                onClick={(e) => {
+                  e.currentTarget.style.cssText = 'background: white; color: #000000 !important; padding: 10px 16px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; width: 100%; transition: all 0.2s ease;';
+                }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#f0f0f0';
-                  e.currentTarget.style.color = '#000000';
-                  e.currentTarget.style.transform = 'scale(1.02)';
+                  e.currentTarget.style.cssText = 'background: #f0f0f0; color: #000000 !important; padding: 10px 16px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; width: 100%; transition: all 0.2s ease; transform: scale(1.02);';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'white';
-                  e.currentTarget.style.color = '#000000';
-                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.cssText = 'background: white; color: #000000 !important; padding: 10px 16px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; width: 100%; transition: all 0.2s ease;';
                 }}
               >
                 View Details
