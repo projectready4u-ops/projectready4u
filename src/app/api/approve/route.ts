@@ -48,6 +48,13 @@ export async function POST(req: NextRequest) {
     // Send approval email with repo link
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER!;
     
+    console.log('[APPROVE API] Sending approval email with:', {
+      email,
+      projectTitle,
+      repoLink,
+      whatsappNumber,
+    });
+
     try {
       const defaultIncludes = [
         'Complete source code',
@@ -57,7 +64,7 @@ export async function POST(req: NextRequest) {
         'Setup instructions',
       ];
 
-      await sendApprovalEmail(
+      const emailResult = await sendApprovalEmail(
         email,
         projectTitle,
         repoLink,
@@ -65,8 +72,14 @@ export async function POST(req: NextRequest) {
         whatsappNumber,
         requestId  // Pass requestId for download link generation
       );
-    } catch (emailError) {
-      console.error('[APPROVE] Email sending failed:', emailError);
+      
+      console.log('[APPROVE API] Email sent successfully:', emailResult.messageId);
+    } catch (emailError: any) {
+      console.error('[APPROVE API] Email sending failed:', {
+        error: emailError.message,
+        code: emailError.code,
+        to: email,
+      });
       // Don't fail the request if email fails - repo access is more important
     }
 

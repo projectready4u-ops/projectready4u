@@ -184,11 +184,12 @@ export default function EmailTemplatesPage() {
                   // Preview Mode
                   <Card className="border border-white/10 bg-white/5 p-6">
                     <h3 className="text-lg font-bold text-white mb-4">Email Preview</h3>
-                    <div className="bg-white p-4 rounded-lg">
-                      <h4 className="font-bold mb-4">{selectedTemplate.subject}</h4>
+                    <div className="bg-white p-4 rounded-lg" style={{ color: '#000000' }}>
+                      <h4 className="font-bold mb-4" style={{ color: '#000000' }}>{selectedTemplate.subject}</h4>
                       <div
                         dangerouslySetInnerHTML={{ __html: selectedTemplate.html_content }}
                         className="text-sm"
+                        style={{ color: '#000000!important' }}
                       />
                     </div>
                   </Card>
