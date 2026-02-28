@@ -210,33 +210,35 @@ export default function FeedbackManagementPage() {
 
                   {/* Actions */}
                   {!feedback.approved && (
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2 md:flex-nowrap md:gap-2 justify-start md:justify-end">
                       <Button
                         onClick={() => handleApprove(feedback.id)}
                         disabled={approving === feedback.id}
-                        className="bg-green-600 hover:bg-green-700 gap-2"
+                        className="bg-green-600 hover:bg-green-700 gap-1 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
                         size="sm"
                       >
                         {approving === feedback.id ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Loader2 className="w-3 h-3 md:w-4 md:h-4 animate-spin" />
                         ) : (
-                          <Check className="w-4 h-4" />
+                          <Check className="w-3 h-3 md:w-4 md:h-4" />
                         )}
-                        Approve
+                        <span className="hidden sm:inline">Approve</span>
+                        <span className="sm:hidden">OK</span>
                       </Button>
                       <Button
                         onClick={() => handleReject(feedback.id)}
                         disabled={approving === feedback.id}
                         variant="outline"
-                        className="border-red-500/50 text-red-400 hover:bg-red-500/10 gap-2"
+                        className="border-red-500/50 text-red-400 hover:bg-red-500/10 gap-1 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
                         size="sm"
                       >
                         {approving === feedback.id ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Loader2 className="w-3 h-3 md:w-4 md:h-4 animate-spin" />
                         ) : (
-                          <X className="w-4 h-4" />
+                          <X className="w-3 h-3 md:w-4 md:h-4" />
                         )}
-                        Reject
+                        <span className="hidden sm:inline">Reject</span>
+                        <span className="sm:hidden">✕</span>
                       </Button>
                     </div>
                   )}

@@ -68,7 +68,7 @@ export default function HomePage() {
   const stats = [
     { icon: BookOpen, label: 'Projects Available', value: `${categories.reduce((sum, cat) => sum + cat.count, 0)}+` },
     { icon: Heart, label: 'Happy Customers', value: `${approvedFeedbackCount}+` },
-    { icon: Users, label: 'Students Served', value: '5,000+' },
+    { icon: Users, label: 'Students Served', value: 'Growing' },
   ];
 
   return (
@@ -131,7 +131,7 @@ export default function HomePage() {
           >
             {/* Badge */}
             <div className="inline-block px-4 py-2 rounded-full border border-violet-500/50 bg-violet-500/10 mb-6">
-              <p className="text-sm text-violet-300">✨ Trusted by 5000+ Students Across India</p>
+              <p className="text-sm text-violet-300">✨ Your trusted academic project partner</p>
             </div>
 
             {/* Headline */}

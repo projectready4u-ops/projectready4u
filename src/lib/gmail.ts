@@ -1,13 +1,31 @@
 import nodemailer from 'nodemailer';
 import { supabase } from './supabase';
 
+// Validate Gmail credentials on startup
+const gmailUser = process.env.GMAIL_USER;
+const gmailPassword = process.env.GMAIL_PASSWORD;
+
+if (!gmailUser || !gmailPassword) {
+  console.error('[GMAIL] ❌ CRITICAL: Gmail credentials not configured!');
+  console.error('[GMAIL] Set GMAIL_USER and GMAIL_PASSWORD env variables');
+}
+
 // Create transporter with Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD,
+    user: gmailUser,
+    pass: gmailPassword,
   },
+});
+
+// Verify Gmail connection on startup
+transporter.verify((error: any, success: any) => {
+  if (error) {
+    console.error('[GMAIL] ❌ SMTP Connection Failed:', error);
+  } else if (success) {
+    console.log('[GMAIL] ✓ SMTP Connection Successful');
+  }
 });
 
 // Helper function to fetch template from database
@@ -133,10 +151,15 @@ export const sendAdminNotificationEmail = async (
       html: htmlContent,
     });
 
-    console.log('[GMAIL] Admin notification sent:', result.messageId);
+    console.log('[GMAIL] ✓ Admin email sent:', result.messageId, 'to:', adminEmail);
     return result;
-  } catch (error) {
-    console.error('[GMAIL] Admin email error:', error);
+  } catch (error: any) {
+    console.error('[GMAIL] ❌ Admin email error:', {
+      to: adminEmail,
+      error: error.message,
+      code: error.code,
+      response: error.response,
+    });
     throw error;
   }
 };
@@ -239,10 +262,15 @@ export const sendRequestConfirmationEmail = async (
       html: htmlContent,
     });
 
-    console.log('[GMAIL] Confirmation email sent to:', userEmail, result.messageId);
+    console.log('[GMAIL] ✓ Confirmation email sent to:', userEmail, '- ID:', result.messageId);
     return result;
-  } catch (error) {
-    console.error('[GMAIL] Confirmation email error:', error);
+  } catch (error: any) {
+    console.error('[GMAIL] ❌ Confirmation email error:', {
+      to: userEmail,
+      error: error.message,
+      code: error.code,
+      response: error.response,
+    });
     throw error;
   }
 };
@@ -341,10 +369,15 @@ export const sendApprovalEmail = async (
       html: htmlContent,
     });
 
-    console.log('[GMAIL] Approval email sent to:', userEmail, result.messageId);
+    console.log('[GMAIL] ✓ Approval email sent to:', userEmail, '- ID:', result.messageId);
     return result;
-  } catch (error) {
-    console.error('[GMAIL] Approval email error:', error);
+  } catch (error: any) {
+    console.error('[GMAIL] ❌ Approval email error:', {
+      to: userEmail,
+      error: error.message,
+      code: error.code,
+      response: error.response,
+    });
     throw error;
   }
 };
