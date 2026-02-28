@@ -147,26 +147,23 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
             <Link href={`/projects/${project.slug}`} className="flex-1">
               <button
                 style={{
-                  backgroundImage: 'linear-gradient(to right, #7c3aed, #4f46e5) !important',
-                  backgroundColor: '#7c3aed !important',
-                  color: 'white !important',
+                  background: 'white',
+                  color: '#000000',
                   padding: '10px 16px',
                   borderRadius: '6px',
                   fontWeight: '600',
-                  border: 'none !important',
+                  border: 'none',
                   cursor: 'pointer',
                   width: '100%',
                   transition: 'all 0.2s ease',
-                  outline: 'none !important',
-                  boxShadow: '0 4px 6px rgba(124, 58, 237, 0.3)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundImage = 'linear-gradient(to right, #6d28d9, #4338ca)';
-                  e.currentTarget.style.boxShadow = '0 6px 12px rgba(109, 40, 217, 0.4)';
+                  e.currentTarget.style.background = '#f0f0f0';
+                  e.currentTarget.style.transform = 'scale(1.02)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundImage = 'linear-gradient(to right, #7c3aed, #4f46e5)';
-                  e.currentTarget.style.boxShadow = '0 4px 6px rgba(124, 58, 237, 0.3)';
+                  e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
                 View Details

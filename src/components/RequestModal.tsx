@@ -183,8 +183,8 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 window.open(generateWhatsAppLink(businessPhone, detailsMessage), '_blank');
               }}
               style={{
-                background: '#059669',
-                color: 'white',
+                background: 'white',
+                color: '#000000',
                 padding: '12px 20px',
                 borderRadius: '6px',
                 fontWeight: '600',
@@ -199,10 +199,10 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                (e.target as HTMLButtonElement).style.background = '#047857';
+                (e.target as HTMLButtonElement).style.background = '#f0f0f0';
               }}
               onMouseLeave={(e) => {
-                (e.target as HTMLButtonElement).style.background = '#059669';
+                (e.target as HTMLButtonElement).style.background = 'white';
               }}
             >
               <MessageCircle className="w-4 h-4" />
