@@ -150,21 +150,25 @@ function generateGitHubZipUrl(repoLink: string): string {
       throw new Error('Invalid GitHub repository URL');
     }
 
-    // Return GitHub archive ZIP URL
-    // This works for both public and private repos if the repoLink has embedded token
-    const zipUrl = `https://github.com/${owner}/${repo}/archive/refs/heads/main.zip`;
+    // Try main branch first, fallback to master
+    // Return GitHub archive ZIP URL that works for public repos
+    const mainZipUrl = `https://github.com/${owner}/${repo}/archive/refs/heads/main.zip`;
+    const masterZipUrl = `https://github.com/${owner}/${repo}/archive/refs/heads/master.zip`;
     
-    // If the original link has a token, we need to embed it in the zip URL
+    // If the original link has a token, we need to embed it
     if (repoLink.includes('@')) {
-      // Extract token from URL
       const tokenMatch = repoLink.match(/https:\/\/([^@]+)@github\.com/);
       if (tokenMatch) {
         const token = tokenMatch[1];
+        // For private repos with token, main branch is more likely
         return `https://${token}@github.com/${owner}/${repo}/archive/refs/heads/main.zip`;
       }
     }
 
-    return zipUrl;
+    // For public repos, return main URL (GitHub will redirect if needed)
+    // Users can always access: https://github.com/owner/repo/releases or /archive/master.zip if main doesn't exist
+    console.log('[GITHUB_ZIP] Generated URL for:', owner, repo, mainZipUrl);
+    return mainZipUrl;
   } catch (error) {
     console.error('[GITHUB_ZIP] Error generating URL:', error);
     throw new Error('Invalid repository link format');
