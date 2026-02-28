@@ -111,20 +111,6 @@ function LoginForm() {
           )}
         </Button>
       </form>
-
-      {/* Info */}
-      <div className="mt-6 p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
-        <p className="text-xs text-cyan-300 font-semibold mb-2">Admin Credentials:</p>
-        <p className="text-xs text-gray-300">
-          <span className="text-cyan-400">Email:</span> projectready4u@gmail.com<br/>
-          <span className="text-cyan-400">Password:</span> AmbiChanna@Kallesh@123
-        </p>
-      </div>
-
-      {/* Note */}
-      <p className="text-xs text-gray-500 text-center mt-4">
-        🔜 Google OAuth login coming soon!
-      </p>
     </Card>
   );
 }

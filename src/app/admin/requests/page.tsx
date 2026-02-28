@@ -249,32 +249,35 @@ export default function AdminRequestsPage() {
                     </div>
 
                     {request.status === 'pending' && (
-                      <div className="flex gap-2 ml-4">
+                      <div className="flex flex-wrap gap-1 md:gap-2 ml-0 md:ml-4 mt-3 md:mt-0">
                         <Button
                           size="sm"
                           onClick={() => handleApproveClick(request)}
                           disabled={approvingId === request.id}
-                          className="bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
+                          className="bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 flex-1 md:flex-none"
                         >
                           {approvingId === request.id ? (
                             <>
-                              <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                              Approving...
+                              <RefreshCw className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2 animate-spin" />
+                              <span className="hidden sm:inline">Approving...</span>
+                              <span className="sm:hidden">...</span>
                             </>
                           ) : (
                             <>
-                              <Zap className="w-4 h-4 mr-2" />
-                              Approve
+                              <Zap className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                              <span className="hidden sm:inline">Approve</span>
+                              <span className="sm:hidden">OK</span>
                             </>
                           )}
                         </Button>
                         <Button
                           size="sm"
                           onClick={() => handleReject(request.id)}
-                          className="bg-red-600 hover:bg-red-700 text-white"
+                          className="bg-red-600 hover:bg-red-700 text-white text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 flex-1 md:flex-none"
                         >
-                          <XCircle className="w-4 h-4 mr-2" />
-                          Reject
+                          <XCircle className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                          <span className="hidden sm:inline">Reject</span>
+                          <span className="sm:hidden">✕</span>
                         </Button>
                       </div>
                     )}
