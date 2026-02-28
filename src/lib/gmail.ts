@@ -284,11 +284,14 @@ export const sendApprovalEmail = async (
   requestId?: string
 ) => {
   const includesList = includes.join(', ');
+  const isGoogleDriveLink = repoLink.includes('drive.google.com');
   const isGitHubLink = repoLink.includes('github.com');
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://projectready4u-virid.vercel.app';
-  const downloadUrl = requestId ? `${siteUrl}/api/download?requestId=${requestId}` : repoLink;
   
-  console.log('[GMAIL] Download URL:', { siteUrl, requestId, downloadUrl });
+  // Use the actual link provided (Google Drive, GitHub, etc.)
+  const downloadUrl = repoLink;
+  const btnText = isGoogleDriveLink ? '📂 Open Google Drive Folder' : isGitHubLink ? '🔗 Open GitHub Repository' : '📥 Download Project';
+  
+  console.log('[GMAIL] Download URL:', { repoLink, isGoogleDriveLink, isGitHubLink });
 
   try {
     // Try to fetch template from database
@@ -305,37 +308,39 @@ export const sendApprovalEmail = async (
         </p>
 
         <div style="margin: 30px 0;">
-          <a href="${downloadUrl}" style="display: block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; font-size: 16px;">
-            📥 Download Project ZIP
+          <a href="${downloadUrl}" target="_blank" rel="noopener noreferrer" style="display: block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; font-size: 16px;">
+            ${btnText}
           </a>
         </div>
 
         <div style="background: #f3f4f6; border: 1px solid #d1d5db; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p style="margin: 0; color: #374151; font-size: 14px;">
-            <strong>📦 What you're downloading:</strong><br/>
-            Complete project source code with all files ready to use. Extract the ZIP and follow the README to get started.
+            <strong>📦 Your Download Link:</strong><br/>
+            <a href="${downloadUrl}" target="_blank" rel="noopener noreferrer" style="color: #7c3aed; text-decoration: none; word-break: break-all;">
+              ${downloadUrl}
+            </a>
           </p>
         </div>
 
         <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px; margin: 20px 0;">
-          <strong style="color: #16a34a;">✅ Your download includes:</strong>
+          <strong style="color: #16a34a;">✅ Your package includes:</strong>
           <p style="margin: 10px 0 0 0; color: #374151;">${includesList}</p>
         </div>
 
         <div style="background: #fef3c7; border: 1px solid #fcd34d; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <strong style="color: #92400e;">How to get started:</strong>
           <p style="margin: 10px 0 0 0; color: #374151; line-height: 1.6;">
-            1. Click the "Download Project ZIP" button above<br/>
-            2. Extract the ZIP file to your desired folder<br/>
-            3. Open the folder and follow the README.md file for setup instructions<br/>
+            1. Click the button above or copy the link<br/>
+            2. ${isGoogleDriveLink ? 'Open the Google Drive folder and download the files' : 'Clone the repository or download the files'}<br/>
+            3. Follow the README.md file for setup instructions<br/>
             4. Reach out on WhatsApp if you need any help
           </p>
         </div>
 
         <div style="background: #dbeafe; border: 1px solid #93c5fd; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p style="margin: 0; color: #1e40af; font-size: 13px;">
-            <strong>ℹ️ Download Link Valid For:</strong> 30 days from approval<br/>
-            <strong>⚠️ Tip:</strong> Save the project to your device immediately. If you have any issues downloading, contact us via WhatsApp!
+            <strong>ℹ️ Access Link Valid For:</strong> 30 days from approval<br/>
+            <strong>⚠️ Tip:</strong> Save this email for future reference. If you have any issues accessing the files, contact us via WhatsApp!
           </p>
         </div>
 
@@ -344,7 +349,7 @@ export const sendApprovalEmail = async (
         </p>
 
         <p style="color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-          💾 Save this email for future reference. Your download link will remain active for 30 days.
+          💾 Save this email for future reference. Your access link will remain active for 30 days.
         </p>
       </div>
     `;
@@ -372,7 +377,7 @@ export const sendApprovalEmail = async (
       html: htmlContent,
     });
 
-    console.log('[GMAIL] ✓ Approval email sent to:', userEmail, '- ID:', result.messageId);
+    console.log('[GMAIL] ✓ Approval email sent to:', userEmail, '- Link:', downloadUrl, '- ID:', result.messageId);
     return result;
   } catch (error: any) {
     console.error('[GMAIL] ❌ Approval email error:', {
