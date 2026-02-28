@@ -159,10 +159,12 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = '#f0f0f0';
+                  e.currentTarget.style.color = '#000000';
                   e.currentTarget.style.transform = 'scale(1.02)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.color = '#000000';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >

@@ -200,9 +200,11 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
               }}
               onMouseEnter={(e) => {
                 (e.target as HTMLButtonElement).style.background = '#f0f0f0';
+                (e.target as HTMLButtonElement).style.color = '#000000';
               }}
               onMouseLeave={(e) => {
                 (e.target as HTMLButtonElement).style.background = 'white';
+                (e.target as HTMLButtonElement).style.color = '#000000';
               }}
             >
               <MessageCircle className="w-4 h-4" />
