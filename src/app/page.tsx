@@ -230,12 +230,33 @@ export default function HomePage() {
           )}
 
           <div className="text-center mt-12">
-            <Link href="/projects">
-              <Button
-                className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold border-none px-8"
+            <Link href="/projects" className="inline-block">
+              <button
+                style={{
+                  background: 'linear-gradient(to right, #7c3aed, #4f46e5)',
+                  color: 'white',
+                  padding: '12px 32px',
+                  borderRadius: '6px',
+                  fontWeight: '600',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #6d28d9, #4338ca)';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #7c3aed, #4f46e5)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
               >
-                View All Projects <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+                View All Projects <ArrowRight className="w-4 h-4" />
+              </button>
             </Link>
           </div>
         </div>

@@ -164,7 +164,7 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
             </div>
 
             {/* WhatsApp Button */}
-            <Button
+            <button
               onClick={() => {
                 const businessPhone = localStorage.getItem('adminSettings') 
                   ? JSON.parse(localStorage.getItem('adminSettings') || '{}').whatsapp_number 
@@ -182,11 +182,32 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 
                 window.open(generateWhatsAppLink(businessPhone, detailsMessage), '_blank');
               }}
-              className="bg-green-600 hover:bg-green-700 gap-2 w-full text-white font-semibold"
+              style={{
+                background: '#059669',
+                color: 'white',
+                padding: '12px 20px',
+                borderRadius: '6px',
+                fontWeight: '600',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '16px',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLButtonElement).style.background = '#047857';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLButtonElement).style.background = '#059669';
+              }}
             >
               <MessageCircle className="w-4 h-4" />
               Save Request Details on WhatsApp
-            </Button>
+            </button>
           </div>
         ) : (
           // Form
