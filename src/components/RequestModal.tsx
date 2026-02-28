@@ -184,7 +184,7 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
               }}
               style={{
                 background: 'white',
-                color: '#000000',
+                color: '#000000 !important',
                 padding: '12px 20px',
                 borderRadius: '6px',
                 fontWeight: '600',

@@ -234,7 +234,7 @@ export default function HomePage() {
               <button
                 style={{
                   background: 'white',
-                  color: '#000000',
+                  color: '#000000 !important',
                   padding: '12px 32px',
                   borderRadius: '6px',
                   fontWeight: '600',

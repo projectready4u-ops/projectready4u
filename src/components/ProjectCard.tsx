@@ -148,7 +148,7 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
               <button
                 style={{
                   background: 'white',
-                  color: '#000000',
+                  color: '#000000 !important',
                   padding: '10px 16px',
                   borderRadius: '6px',
                   fontWeight: '600',
