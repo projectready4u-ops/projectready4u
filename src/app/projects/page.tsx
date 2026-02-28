@@ -22,7 +22,9 @@ function ProjectsPageContent() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceSort, setPriceSort] = useState('latest');
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Load initial data - this runs once on mount
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -33,6 +35,7 @@ function ProjectsPageContent() {
         setProjects(projectsData);
         setFilteredProjects(projectsData);
         setCategories(categoriesData);
+        setIsInitialized(true);
 
         // Check for category in URL query params
         const categoryParam = searchParams.get('category');
@@ -40,14 +43,25 @@ function ProjectsPageContent() {
           setSelectedCategory(categoryParam);
         }
       } catch (error) {
+        console.error('Failed to load projects:', error);
         toast.error('Failed to load projects');
+        setIsInitialized(true);
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, [searchParams]);
+  }, []); // Empty dependency - run only once on mount
+
+  // Handle category change from URL
+  useEffect(() => {
+    if (!isInitialized) return;
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [searchParams, isInitialized]);
 
   useEffect(() => {
     let filtered = projects;
