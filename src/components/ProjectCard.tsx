@@ -146,7 +146,8 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
           <div className="flex gap-2">
             <Link href={`/projects/${project.slug}`} className="flex-1">
               <Button
-                className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-medium transition-all"
+                variant="ghost"
+                className="w-full !text-white !bg-white/10 hover:!bg-white/20 !border !border-white/30 hover:!border-white/50 font-medium"
               >
                 View Details
               </Button>
