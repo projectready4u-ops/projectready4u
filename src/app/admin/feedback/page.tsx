@@ -134,27 +134,102 @@ export default function FeedbackManagementPage() {
 
         {/* Filters */}
         <div className="flex gap-2 mb-6">
-          <Button
+          <button
             onClick={() => setFilter('all')}
-            variant={filter === 'all' ? 'default' : 'outline'}
-            className={filter === 'all' ? 'bg-violet-600' : 'border-white/20 text-white'}
+            style={{
+              background: filter === 'all' ? 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)' : 'transparent',
+              color: '#ffffff !important',
+              padding: '10px 16px',
+              borderRadius: '6px',
+              fontWeight: '600',
+              border: filter === 'all' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              cursor: 'pointer',
+              fontSize: '14px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (filter === 'all') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
+              } else {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter === 'all') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+                e.currentTarget.style.boxShadow = 'none';
+              } else {
+                e.currentTarget.style.background = 'transparent';
+              }
+            }}
           >
             All
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={() => setFilter('pending')}
-            variant={filter === 'pending' ? 'default' : 'outline'}
-            className={filter === 'pending' ? 'bg-yellow-600' : 'border-white/20 text-white'}
+            style={{
+              background: filter === 'pending' ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' : 'transparent',
+              color: '#ffffff !important',
+              padding: '10px 16px',
+              borderRadius: '6px',
+              fontWeight: '600',
+              border: filter === 'pending' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              cursor: 'pointer',
+              fontSize: '14px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (filter === 'pending') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #d97706 0%, #b45309 100%)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(245, 158, 11, 0.4)';
+              } else {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter === 'pending') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                e.currentTarget.style.boxShadow = 'none';
+              } else {
+                e.currentTarget.style.background = 'transparent';
+              }
+            }}
           >
             Pending ({pendinCount})
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={() => setFilter('approved')}
-            variant={filter === 'approved' ? 'default' : 'outline'}
-            className={filter === 'approved' ? 'bg-green-600' : 'border-white/20 text-white'}
+            style={{
+              background: filter === 'approved' ? 'linear-gradient(135deg, #059669 0%, #047857 100%)' : 'transparent',
+              color: '#ffffff !important',
+              padding: '10px 16px',
+              borderRadius: '6px',
+              fontWeight: '600',
+              border: filter === 'approved' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              cursor: 'pointer',
+              fontSize: '14px',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (filter === 'approved') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
+              } else {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (filter === 'approved') {
+                e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                e.currentTarget.style.boxShadow = 'none';
+              } else {
+                e.currentTarget.style.background = 'transparent';
+              }
+            }}
           >
             Approved ({approvedCount})
-          </Button>
+          </button>
         </div>
 
         {/* Feedback List */}

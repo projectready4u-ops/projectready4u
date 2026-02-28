@@ -178,28 +178,90 @@ export default function AdminRequestsPage() {
         <div className="p-8">
           {/* Filters */}
           <div className="flex gap-2 mb-6">
-            {['all', 'pending', 'approved', 'rejected'].map((status) => (
-              <Button
-                key={status}
-                variant={filter === status ? 'default' : 'ghost'}
-                className={`capitalize ${
-                  filter === status
-                    ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
-                onClick={() => setFilter(status as any)}
-              >
-                {status}
-              </Button>
-            ))}
+            {['all', 'pending', 'approved', 'rejected'].map((status) => {
+              const getGradient = (s: string) => {
+                if (s === 'pending') return 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                if (s === 'approved') return 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                if (s === 'rejected') return 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)';
+                return 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+              };
+              const getDarkerGradient = (s: string) => {
+                if (s === 'pending') return 'linear-gradient(135deg, #d97706 0%, #b45309 100%)';
+                if (s === 'approved') return 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+                if (s === 'rejected') return 'linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%)';
+                return 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+              };
+              const getShadowColor = (s: string) => {
+                if (s === 'pending') return 'rgba(245, 158, 11, 0.4)';
+                if (s === 'approved') return 'rgba(5, 150, 105, 0.4)';
+                if (s === 'rejected') return 'rgba(220, 38, 38, 0.4)';
+                return 'rgba(124, 58, 237, 0.4)';
+              };
+              return (
+                <button
+                  key={status}
+                  onClick={() => setFilter(status as any)}
+                  style={{
+                    background: filter === status ? getGradient(status) : 'transparent',
+                    color: '#ffffff !important',
+                    padding: '10px 16px',
+                    borderRadius: '6px',
+                    fontWeight: '600',
+                    border: filter === status ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    textTransform: 'capitalize',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (filter === status) {
+                      e.currentTarget.style.background = getDarkerGradient(status);
+                      e.currentTarget.style.boxShadow = `0 8px 16px ${getShadowColor(status)}`;
+                    } else {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (filter === status) {
+                      e.currentTarget.style.background = getGradient(status);
+                      e.currentTarget.style.boxShadow = 'none';
+                    } else {
+                      e.currentTarget.style.background = 'transparent';
+                    }
+                  }}
+                >
+                  {status}
+                </button>
+              );
+            })}
             <div className="ml-auto">
-              <Button
+              <button
                 onClick={loadRequests}
-                variant="ghost"
-                className="text-gray-300 hover:text-white hover:bg-white/10"
+                style={{
+                  background: 'transparent',
+                  color: '#ffffff !important',
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  fontWeight: '600',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                }}
               >
                 <RefreshCw className="w-4 h-4" />
-              </Button>
+              </button>
             </div>
           </div>
 
