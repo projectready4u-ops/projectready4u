@@ -163,21 +163,78 @@ export default function EmailTemplatesPage() {
               <div className="space-y-6">
                 {/* Preview Mode Toggle */}
                 <div className="flex gap-2">
-                  <Button
+                  <button
                     onClick={() => setPreviewMode(false)}
-                    variant={previewMode ? 'outline' : 'default'}
-                    className="bg-violet-600 hover:bg-violet-700"
+                    style={{
+                      background: previewMode ? 'transparent' : 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+                      color: '#ffffff !important',
+                      padding: '10px 16px',
+                      borderRadius: '6px',
+                      fontWeight: '600',
+                      border: previewMode ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (previewMode) {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                      } else {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+                        e.currentTarget.style.transform = 'scale(1.02)';
+                        e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (previewMode) {
+                        e.currentTarget.style.background = 'transparent';
+                      } else {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }
+                    }}
                   >
                     ✏️ Edit
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     onClick={() => setPreviewMode(true)}
-                    variant={previewMode ? 'default' : 'outline'}
-                    className="text-white border-white/20 hover:border-white/40"
+                    style={{
+                      background: previewMode ? 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)' : 'transparent',
+                      color: '#ffffff !important',
+                      padding: '10px 16px',
+                      borderRadius: '6px',
+                      fontWeight: '600',
+                      border: previewMode ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!previewMode) {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                      } else {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+                        e.currentTarget.style.transform = 'scale(1.02)';
+                        e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!previewMode) {
+                        e.currentTarget.style.background = 'transparent';
+                      } else {
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }
+                    }}
                   >
                     <Eye className="w-4 h-4 mr-2" />
                     Preview
-                  </Button>
+                  </button>
                 </div>
 
                 {previewMode ? (
@@ -261,10 +318,36 @@ export default function EmailTemplatesPage() {
 
                     {/* Save Button */}
                     <div className="flex gap-3">
-                      <Button
+                      <button
                         onClick={handleSaveTemplate}
                         disabled={saving}
-                        className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 gap-2"
+                        style={{
+                          background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+                          color: '#ffffff !important',
+                          padding: '12px 24px',
+                          borderRadius: '6px',
+                          fontWeight: '600',
+                          border: 'none',
+                          cursor: saving ? 'not-allowed' : 'pointer',
+                          fontSize: '14px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          transition: 'all 0.3s ease',
+                          opacity: saving ? 0.7 : 1,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!saving) {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+                            e.currentTarget.style.transform = 'scale(1.02)';
+                            e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
                         {saving ? (
                           <>
@@ -277,7 +360,7 @@ export default function EmailTemplatesPage() {
                             Save Changes
                           </>
                         )}
-                      </Button>
+                      </button>
                     </div>
                   </>
                 )}

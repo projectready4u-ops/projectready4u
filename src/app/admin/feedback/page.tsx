@@ -211,11 +211,36 @@ export default function FeedbackManagementPage() {
                   {/* Actions */}
                   {!feedback.approved && (
                     <div className="flex flex-wrap gap-2 md:flex-nowrap md:gap-2 justify-start md:justify-end">
-                      <Button
+                      <button
                         onClick={() => handleApprove(feedback.id)}
                         disabled={approving === feedback.id}
-                        className="bg-green-600 hover:bg-green-700 gap-1 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
-                        size="sm"
+                        style={{
+                          background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                          color: '#ffffff !important',
+                          padding: '8px 12px',
+                          borderRadius: '6px',
+                          fontWeight: '600',
+                          border: 'none',
+                          cursor: approving === feedback.id ? 'not-allowed' : 'pointer',
+                          fontSize: '12px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          transition: 'all 0.3s ease',
+                          opacity: approving === feedback.id ? 0.6 : 1,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (approving !== feedback.id) {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                            e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
                         {approving === feedback.id ? (
                           <Loader2 className="w-3 h-3 md:w-4 md:h-4 animate-spin" />
@@ -224,13 +249,37 @@ export default function FeedbackManagementPage() {
                         )}
                         <span className="hidden sm:inline">Approve</span>
                         <span className="sm:hidden">OK</span>
-                      </Button>
-                      <Button
+                      </button>
+                      <button
                         onClick={() => handleReject(feedback.id)}
                         disabled={approving === feedback.id}
-                        variant="outline"
-                        className="border-red-500/50 text-red-400 hover:bg-red-500/10 gap-1 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3"
-                        size="sm"
+                        style={{
+                          background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)',
+                          color: '#ffffff !important',
+                          padding: '8px 12px',
+                          borderRadius: '6px',
+                          fontWeight: '600',
+                          border: 'none',
+                          cursor: approving === feedback.id ? 'not-allowed' : 'pointer',
+                          fontSize: '12px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          transition: 'all 0.3s ease',
+                          opacity: approving === feedback.id ? 0.6 : 1,
+                        }}
+                        onMouseEnter={(e) => {
+                          if (approving !== feedback.id) {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                            e.currentTarget.style.boxShadow = '0 8px 16px rgba(220, 38, 38, 0.4)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
                         {approving === feedback.id ? (
                           <Loader2 className="w-3 h-3 md:w-4 md:h-4 animate-spin" />
@@ -239,7 +288,7 @@ export default function FeedbackManagementPage() {
                         )}
                         <span className="hidden sm:inline">Reject</span>
                         <span className="sm:hidden">✕</span>
-                      </Button>
+                      </button>
                     </div>
                   )}
                 </div>

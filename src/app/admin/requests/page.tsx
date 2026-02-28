@@ -266,11 +266,37 @@ export default function AdminRequestsPage() {
 
                     {request.status === 'pending' && (
                       <div className="flex flex-wrap gap-1 md:gap-2 ml-0 md:ml-4 mt-3 md:mt-0">
-                        <Button
-                          size="sm"
+                        <button
                           onClick={() => handleApproveClick(request)}
                           disabled={approvingId === request.id}
-                          className="bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 flex-1 md:flex-none"
+                          style={{
+                            background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                            color: '#ffffff !important',
+                            padding: '8px 12px',
+                            borderRadius: '6px',
+                            fontWeight: '600',
+                            border: 'none',
+                            cursor: approvingId === request.id ? 'not-allowed' : 'pointer',
+                            fontSize: '12px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            transition: 'all 0.3s ease',
+                            opacity: approvingId === request.id ? 0.6 : 1,
+                            flex: '1 1 auto',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (approvingId !== request.id) {
+                              e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+                              e.currentTarget.style.transform = 'scale(1.05)';
+                              e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+                            e.currentTarget.style.transform = 'scale(1)';
+                            e.currentTarget.style.boxShadow = 'none';
+                          }}
                         >
                           {approvingId === request.id ? (
                             <>
@@ -285,16 +311,39 @@ export default function AdminRequestsPage() {
                               <span className="sm:hidden">OK</span>
                             </>
                           )}
-                        </Button>
-                        <Button
-                          size="sm"
+                        </button>
+                        <button
                           onClick={() => handleReject(request.id)}
-                          className="bg-red-600 hover:bg-red-700 text-white text-xs md:text-sm py-1 md:py-2 px-2 md:px-3 flex-1 md:flex-none"
+                          style={{
+                            background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)',
+                            color: '#ffffff !important',
+                            padding: '8px 12px',
+                            borderRadius: '6px',
+                            fontWeight: '600',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '12px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            transition: 'all 0.3s ease',
+                            flex: '1 1 auto',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                            e.currentTarget.style.boxShadow = '0 8px 16px rgba(220, 38, 38, 0.4)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)';
+                            e.currentTarget.style.transform = 'scale(1)';
+                            e.currentTarget.style.boxShadow = 'none';
+                          }}
                         >
                           <XCircle className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                           <span className="hidden sm:inline">Reject</span>
                           <span className="sm:hidden">✕</span>
-                        </Button>
+                        </button>
                       </div>
                     )}
                   </div>
