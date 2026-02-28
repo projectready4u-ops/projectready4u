@@ -146,7 +146,23 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
           <div className="flex gap-2">
             <Link href={`/projects/${project.slug}`} className="flex-1">
               <button
-                className="w-full px-4 py-2 rounded-md font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 active:from-violet-800 active:to-indigo-800 transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(to right, #7c3aed, #4f46e5)',
+                  color: 'white',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  fontWeight: '600',
+                  border: 'none',
+                  cursor: 'pointer',
+                  width: '100%',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #6d28d9, #4338ca)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(to right, #7c3aed, #4f46e5)';
+                }}
               >
                 View Details
               </button>
