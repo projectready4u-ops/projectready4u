@@ -202,32 +202,27 @@ export default function AdminRequestsPage() {
                   key={status}
                   onClick={() => setFilter(status as any)}
                   style={{
-                    background: filter === status ? getGradient(status) : 'transparent',
+                    background: getGradient(status),
                     color: '#ffffff !important',
                     padding: '10px 16px',
                     borderRadius: '6px',
                     fontWeight: '600',
-                    border: filter === status ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+                    border: 'none',
                     cursor: 'pointer',
                     fontSize: '14px',
                     textTransform: 'capitalize',
                     transition: 'all 0.3s ease',
+                    opacity: filter === status ? 1 : 0.7,
                   }}
                   onMouseEnter={(e) => {
-                    if (filter === status) {
-                      e.currentTarget.style.background = getDarkerGradient(status);
-                      e.currentTarget.style.boxShadow = `0 8px 16px ${getShadowColor(status)}`;
-                    } else {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                    }
+                    e.currentTarget.style.background = getDarkerGradient(status);
+                    e.currentTarget.style.boxShadow = `0 8px 16px ${getShadowColor(status)}`;
+                    e.currentTarget.style.transform = 'scale(1.05)';
                   }}
                   onMouseLeave={(e) => {
-                    if (filter === status) {
-                      e.currentTarget.style.background = getGradient(status);
-                      e.currentTarget.style.boxShadow = 'none';
-                    } else {
-                      e.currentTarget.style.background = 'transparent';
-                    }
+                    e.currentTarget.style.background = getGradient(status);
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
                   {status}

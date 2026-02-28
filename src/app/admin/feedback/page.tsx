@@ -137,31 +137,26 @@ export default function FeedbackManagementPage() {
           <button
             onClick={() => setFilter('all')}
             style={{
-              background: filter === 'all' ? 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)' : 'transparent',
+              background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
               color: '#ffffff !important',
               padding: '10px 16px',
               borderRadius: '6px',
               fontWeight: '600',
-              border: filter === 'all' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              border: 'none',
               cursor: 'pointer',
               fontSize: '14px',
               transition: 'all 0.3s ease',
+              opacity: filter === 'all' ? 1 : 0.7,
             }}
             onMouseEnter={(e) => {
-              if (filter === 'all') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
-              } else {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9 0%, #4338ca 100%)';
+              e.currentTarget.style.boxShadow = '0 8px 16px rgba(124, 58, 237, 0.4)';
+              e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              if (filter === 'all') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
-                e.currentTarget.style.boxShadow = 'none';
-              } else {
-                e.currentTarget.style.background = 'transparent';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
             }}
           >
             All
@@ -169,31 +164,26 @@ export default function FeedbackManagementPage() {
           <button
             onClick={() => setFilter('pending')}
             style={{
-              background: filter === 'pending' ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' : 'transparent',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
               color: '#ffffff !important',
               padding: '10px 16px',
               borderRadius: '6px',
               fontWeight: '600',
-              border: filter === 'pending' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              border: 'none',
               cursor: 'pointer',
               fontSize: '14px',
               transition: 'all 0.3s ease',
+              opacity: filter === 'pending' ? 1 : 0.7,
             }}
             onMouseEnter={(e) => {
-              if (filter === 'pending') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #d97706 0%, #b45309 100%)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(245, 158, 11, 0.4)';
-              } else {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #d97706 0%, #b45309 100%)';
+              e.currentTarget.style.boxShadow = '0 8px 16px rgba(245, 158, 11, 0.4)';
+              e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              if (filter === 'pending') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
-                e.currentTarget.style.boxShadow = 'none';
-              } else {
-                e.currentTarget.style.background = 'transparent';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
             }}
           >
             Pending ({pendinCount})
@@ -201,31 +191,26 @@ export default function FeedbackManagementPage() {
           <button
             onClick={() => setFilter('approved')}
             style={{
-              background: filter === 'approved' ? 'linear-gradient(135deg, #059669 0%, #047857 100%)' : 'transparent',
+              background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
               color: '#ffffff !important',
               padding: '10px 16px',
               borderRadius: '6px',
               fontWeight: '600',
-              border: filter === 'approved' ? 'none' : '1px solid rgba(255, 255, 255, 0.2)',
+              border: 'none',
               cursor: 'pointer',
               fontSize: '14px',
               transition: 'all 0.3s ease',
+              opacity: filter === 'approved' ? 1 : 0.7,
             }}
             onMouseEnter={(e) => {
-              if (filter === 'approved') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
-              } else {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #047857 0%, #065f46 100%)';
+              e.currentTarget.style.boxShadow = '0 8px 16px rgba(5, 150, 105, 0.4)';
+              e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              if (filter === 'approved') {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
-                e.currentTarget.style.boxShadow = 'none';
-              } else {
-                e.currentTarget.style.background = 'transparent';
-              }
+              e.currentTarget.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'scale(1)';
             }}
           >
             Approved ({approvedCount})
