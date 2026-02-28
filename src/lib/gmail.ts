@@ -285,7 +285,10 @@ export const sendApprovalEmail = async (
 ) => {
   const includesList = includes.join(', ');
   const isGitHubLink = repoLink.includes('github.com');
-  const downloadUrl = requestId ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/download?requestId=${requestId}` : repoLink;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://projectready4u-virid.vercel.app';
+  const downloadUrl = requestId ? `${siteUrl}/api/download?requestId=${requestId}` : repoLink;
+  
+  console.log('[GMAIL] Download URL:', { siteUrl, requestId, downloadUrl });
 
   try {
     // Try to fetch template from database
