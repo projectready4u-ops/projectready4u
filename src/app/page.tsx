@@ -234,6 +234,7 @@ export default function HomePage() {
               <button
                 style={{
                   background: 'white',
+                  color: '#000000 !important',
                   padding: '12px 32px',
                   borderRadius: '6px',
                   fontWeight: '600',
@@ -243,16 +244,6 @@ export default function HomePage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  transition: 'all 0.2s ease',
-                }}
-                onClick={(e) => {
-                  e.currentTarget.style.cssText = 'background: white; color: #000000 !important; padding: 12px 32px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;';
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.cssText = 'background: #f0f0f0; color: #000000 !important; padding: 12px 32px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease; transform: scale(1.05);';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.cssText = 'background: white; color: #000000 !important; padding: 12px 32px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;';
                 }}
               >
                 View All Projects <ArrowRight className="w-4 h-4" />

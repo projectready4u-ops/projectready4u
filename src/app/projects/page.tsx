@@ -2,6 +2,8 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -94,6 +96,43 @@ function ProjectsPageContent() {
 
   return (
     <main className="bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a] to-[#111111] min-h-screen">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 backdrop-blur border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+              <Image
+                src="/logo.jpeg"
+                alt="Project Ready 4U"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
+            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-bold text-xl hidden sm:inline">
+              Project Ready 4U
+            </span>
+          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/projects">
+              <Button variant="ghost" className="text-white hover:text-violet-400">
+                Projects
+              </Button>
+            </Link>
+            <Button
+              onClick={() => {
+                const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210';
+                window.open(`https://wa.me/${phone}`, '_blank');
+              }}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              WhatsApp
+            </Button>
+          </div>
+        </div>
+      </nav>
+
       {/* Header */}
       <div className="border-b border-white/10 sticky top-0 z-40 bg-gradient-to-b from-[#0a0a0a] to-black/80 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 py-6">

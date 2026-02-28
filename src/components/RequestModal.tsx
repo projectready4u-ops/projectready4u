@@ -184,6 +184,7 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
               }}
               style={{
                 background: 'white',
+                color: '#000000 !important',
                 padding: '12px 20px',
                 borderRadius: '6px',
                 fontWeight: '600',
@@ -195,13 +196,6 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLButtonElement).style.cssText = 'background: #f0f0f0; color: #000000 !important; padding: 12px 20px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;';
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLButtonElement).style.cssText = 'background: white; color: #000000 !important; padding: 12px 20px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;';
               }}
             >
               <MessageCircle className="w-4 h-4" />
