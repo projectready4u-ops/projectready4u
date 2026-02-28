@@ -71,7 +71,7 @@ export default function AdminRequestsPage() {
         .from('project_requests')
         .select(`
           *,
-          projects:project_id(title, github_repo_link)
+          projects:project_id(title, github_repo_link, google_drive_link)
         `)
         .order('created_at', { ascending: false });
 
@@ -85,14 +85,14 @@ export default function AdminRequestsPage() {
   };
 
   const handleApproveClick = async (request: ProjectRequest) => {
-    // Open approval dialog with default download link from GitHub
+    // Open approval dialog with default download link from project's Google Drive
     const projectData = request.projects as any;
-    const repoLink = projectData?.github_repo_link || '';
+    const defaultLink = projectData?.google_drive_link || projectData?.github_repo_link || '';
     
     setApprovalDialog({
       isOpen: true,
       request,
-      downloadLink: repoLink,
+      downloadLink: defaultLink,
     });
   };
 

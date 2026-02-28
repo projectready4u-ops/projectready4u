@@ -32,6 +32,7 @@ export default function AdminProjectsPage() {
     discounted_price: '',
     video_url: '',
     github_repo_link: '',
+    google_drive_link: '',
     thumbnail_url: '',
   });
   const [submitting, setSubmitting] = useState(false);
@@ -117,6 +118,7 @@ export default function AdminProjectsPage() {
       discounted_price: String(project.discounted_price),
       video_url: project.video_url,
       github_repo_link: project.github_repo_link,
+      google_drive_link: (project as any).google_drive_link || '',
       thumbnail_url: project.thumbnail_url,
     });
     setSlugEdited(true);
@@ -159,6 +161,7 @@ export default function AdminProjectsPage() {
             discounted_price: parseFloat(formData.discounted_price) || 0,
             video_url: formData.video_url,
             github_repo_link: formData.github_repo_link,
+            google_drive_link: formData.google_drive_link,
             thumbnail_url: formData.thumbnail_url,
           })
           .eq('id', editingProject.id);
@@ -178,6 +181,7 @@ export default function AdminProjectsPage() {
           discounted_price: parseFloat(formData.discounted_price) || 0,
           video_url: formData.video_url,
           github_repo_link: formData.github_repo_link,
+          google_drive_link: formData.google_drive_link,
           thumbnail_url: formData.thumbnail_url,
           includes_source: true,
           includes_report: true,
@@ -205,6 +209,7 @@ export default function AdminProjectsPage() {
         discounted_price: '',
         video_url: '',
         github_repo_link: '',
+        google_drive_link: '',
         thumbnail_url: '',
       });
       loadProjects();
@@ -483,6 +488,32 @@ export default function AdminProjectsPage() {
                       className="mt-1 bg-white/5 border-white/10 text-white"
                     />
                   </div>
+                </div>
+
+                {/* Google Drive Link */}
+                <div>
+                  <label className="text-white text-sm font-medium">📂 Google Drive Folder Link (Viewer only)</label>
+                  <p className="text-xs text-gray-400 mb-2">Share link to your Google Drive folder with &quot;Viewer&quot; permission for students to download project files</p>
+                  <Input
+                    type="url"
+                    placeholder="https://drive.google.com/drive/folders/..."
+                    value={formData.google_drive_link}
+                    onChange={(e) => setFormData({...formData, google_drive_link: e.target.value})}
+                    className="mt-1 bg-white/5 border-white/10 text-white"
+                  />
+                </div>
+
+                {/* Google Drive Link */}
+                <div>
+                  <label className="text-white text-sm font-medium">📂 Google Drive Folder Link (Viewer only)</label>
+                  <p className="text-xs text-gray-400 mb-2">Share link to your Google Drive folder with "Viewer" permission for students to download project files</p>
+                  <Input
+                    type="url"
+                    placeholder="https://drive.google.com/drive/folders/..."
+                    value={formData.google_drive_link}
+                    onChange={(e) => setFormData({...formData, google_drive_link: e.target.value})}
+                    className="mt-1 bg-white/5 border-white/10 text-white"
+                  />
                 </div>
 
                 {/* Thumbnail */}
