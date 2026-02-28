@@ -26,6 +26,12 @@ interface ProjectRequest {
   };
 }
 
+interface ApprovalDialogState {
+  isOpen: boolean;
+  request: ProjectRequest | null;
+  downloadLink: string;
+}
+
 export default function AdminRequestsPage() {
   const router = useRouter();
   const [requests, setRequests] = useState<ProjectRequest[]>([]);
@@ -34,6 +40,11 @@ export default function AdminRequestsPage() {
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [approvalDialog, setApprovalDialog] = useState<ApprovalDialogState>({
+    isOpen: false,
+    request: null,
+    downloadLink: '',
+  });
 
   useEffect(() => {
     const checkAuth = () => {
@@ -74,30 +85,24 @@ export default function AdminRequestsPage() {
   };
 
   const handleApproveClick = async (request: ProjectRequest) => {
-    try {
-      setApprovingId(request.id);
-      
-      // Get the repo link from the project
-      const projectData = request.projects as any;
-      const repoLink = projectData?.github_repo_link;
-
-      if (!repoLink) {
-        toast.error('This project does not have a repository link configured');
-        setApprovingId(null);
-        return;
-      }
-
-      // Directly approve without modal
-      await handleApprove(request, repoLink);
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to approve request');
-    } finally {
-      setApprovingId(null);
-    }
+    // Open approval dialog with default download link from GitHub
+    const projectData = request.projects as any;
+    const repoLink = projectData?.github_repo_link || '';
+    
+    setApprovalDialog({
+      isOpen: true,
+      request,
+      downloadLink: repoLink,
+    });
   };
 
   const handleApprove = async (request: ProjectRequest, repoLink: string) => {
     try {
+      if (!repoLink.trim()) {
+        toast.error('Download link is required');
+        return;
+      }
+
       const response = await fetch('/api/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -116,10 +121,21 @@ export default function AdminRequestsPage() {
         throw new Error(error.error || 'Failed to approve request');
       }
 
-      toast.success('✅ Request approved! Email sent with repository access.');
+      toast.success('✅ Request approved! Email sent with download link.');
+      setApprovalDialog({ isOpen: false, request: null, downloadLink: '' });
       loadRequests();
     } catch (error: any) {
-      throw error;
+      toast.error(error.message || 'Failed to approve request');
+    }
+  };
+
+  const handleApprovalDialogSubmit = async () => {
+    if (!approvalDialog.request) return;
+    setApprovingId(approvalDialog.request.id);
+    try {
+      await handleApprove(approvalDialog.request, approvalDialog.downloadLink);
+    } finally {
+      setApprovingId(null);
     }
   };
 
@@ -297,6 +313,62 @@ export default function AdminRequestsPage() {
             </Card>
           )}
         </div>
+        
+        {/* Approval Dialog Modal */}
+        {approvalDialog.isOpen && approvalDialog.request && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <Card className="w-full max-w-md border border-white/20 bg-[#1a1a1a]">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-white mb-4">Approve Request</h2>
+                
+                <div className="mb-4 p-3 bg-white/5 rounded border border-white/10">
+                  <p className="text-sm text-gray-300"><strong>Student:</strong> {approvalDialog.request.user_name}</p>
+                  <p className="text-sm text-gray-300"><strong>Email:</strong> {approvalDialog.request.user_email}</p>
+                  <p className="text-sm text-gray-300"><strong>Project:</strong> {approvalDialog.request.projects?.title}</p>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-white mb-2">
+                    📥 Download Link
+                  </label>
+                  <p className="text-xs text-gray-400 mb-2">
+                    Paste a direct download link. Options:<br/>
+                    • Google Drive share link<br/>
+                    • Dropbox share link<br/>
+                    • GitHub repo URL<br/>
+                    • OneDrive share link
+                  </p>
+                  <textarea
+                    value={approvalDialog.downloadLink}
+                    onChange={(e) => setApprovalDialog({
+                      ...approvalDialog,
+                      downloadLink: e.target.value
+                    })}
+                    placeholder="https://drive.google.com/file/d/... or https://github.com/owner/repo"
+                    className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded text-white text-sm placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                    rows={3}
+                  />
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    onClick={() => setApprovalDialog({ isOpen: false, request: null, downloadLink: '' })}
+                    className="flex-1 bg-gray-700 hover:bg-gray-600 text-white"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleApprovalDialogSubmit}
+                    disabled={approvingId === approvalDialog.request.id || !approvalDialog.downloadLink.trim()}
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
+                  >
+                    {approvingId === approvalDialog.request.id ? 'Approving...' : '✓ Approve'}
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
           </>
         )}
       </main>
