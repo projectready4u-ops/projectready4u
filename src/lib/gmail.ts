@@ -112,11 +112,11 @@ export const sendAdminNotificationEmail = async (
           </div>
         </div>
 
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
-          <a href="${whatsappLink}" style="display: inline-block; background: #25d366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="${whatsappLink}" style="display: inline-block; background: #25d366; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; text-align: center; border: 2px solid #25d366;">
             📱 Open WhatsApp
           </a>
-          <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/requests" style="display: inline-block; background: #6366f1; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+          <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/requests" style="display: inline-block; background: #6366f1; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; text-align: center; border: 2px solid #6366f1;">
             📋 View in Admin
           </a>
         </div>
@@ -308,7 +308,7 @@ export const sendApprovalEmail = async (
         </p>
 
         <div style="margin: 30px 0;">
-          <a href="${downloadUrl}" target="_blank" rel="noopener noreferrer" style="display: block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; font-size: 16px;">
+          <a href="${downloadUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; padding: 16px 40px; border-radius: 8px; text-decoration: none; font-weight: 700; text-align: center; font-size: 16px; border: 2px solid #16a34a; transition: all 0.2s ease;">
             ${btnText}
           </a>
         </div>

@@ -232,8 +232,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Link href="/projects">
               <Button
-                variant="outline"
-                className="border-white/20 hover:border-white/40 text-white font-semibold"
+                className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold border-none px-8"
               >
                 View All Projects <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

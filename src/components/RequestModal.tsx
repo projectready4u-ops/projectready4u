@@ -182,10 +182,10 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 
                 window.open(generateWhatsAppLink(businessPhone, detailsMessage), '_blank');
               }}
-              className="bg-green-600 hover:bg-green-700 gap-2 w-full"
+              className="bg-green-600 hover:bg-green-700 gap-2 w-full text-white font-semibold"
             >
               <MessageCircle className="w-4 h-4" />
-              Save Request Details on WhatsApp →
+              Save Request Details on WhatsApp
             </Button>
           </div>
         ) : (
