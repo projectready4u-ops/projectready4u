@@ -233,8 +233,8 @@ export default function HomePage() {
             <Link href="/projects" className="inline-block">
               <button
                 style={{
-                  background: 'white',
-                  color: '#000000 !important',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+                  color: '#ffffff !important',
                   padding: '12px 32px',
                   borderRadius: '6px',
                   fontWeight: '600',

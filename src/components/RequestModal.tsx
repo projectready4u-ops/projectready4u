@@ -183,8 +183,8 @@ export function RequestModal({ project, open, onOpenChange }: RequestModalProps)
                 window.open(generateWhatsAppLink(businessPhone, detailsMessage), '_blank');
               }}
               style={{
-                background: 'white',
-                color: '#000000 !important',
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                color: '#ffffff !important',
                 padding: '12px 20px',
                 borderRadius: '6px',
                 fontWeight: '600',

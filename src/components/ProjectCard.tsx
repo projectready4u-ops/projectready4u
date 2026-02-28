@@ -147,8 +147,8 @@ export function ProjectCard({ project, showDemo = true, featured = false }: Proj
             <Link href={`/projects/${project.slug}`} className="flex-1">
               <button
                 style={{
-                  background: 'white',
-                  color: '#000000 !important',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+                  color: '#ffffff !important',
                   padding: '10px 16px',
                   borderRadius: '6px',
                   fontWeight: '600',
