@@ -65,7 +65,7 @@ export function AdminSidebar({ userName }: AdminSidebarProps) {
         <div className="p-6 border-b border-white/10 flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
             <Image
-              src="/logo.jpeg"
+              src="/logo.png"
               alt="Project Ready 4U"
               width={40}
               height={40}
